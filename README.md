@@ -43,19 +43,30 @@ To prove out the proposed design Adventure works have contracted a Solutions Int
 
 
 Technical Demonstration Setup:
+
 Azure
+
 •	Source Database: SQL Server 2022 (Standard D2ads v6 (2 vcpus, 8 GiB memory))
+
 •	Test data: Adventureworks LightWeight database
+
 •	Transaction velocity: Six sales transaction per second, comprising of 105 database transactions per second.
+
 •	Azure SQL Managed instance size: General Purpose Standard-series (Gen 5) (4 vCores, 20GB Memory, 64 GB storage, Geo-redundant backup storage)
+
 
 ![Azure SQL Setup](image-3.png)
 
 Microsoft Fabric
+
 •	Fabric SKU: F2 Capacity
+
 •	Workspace setup: Two workspaces
-o	Workspace 1: Landing zone for the Mirrored Database
-o	Workspace 2: Consumption workspace for the Operational Data Store
+
+    o	Workspace 1: Landing zone for the Mirrored Database
+
+    o	Workspace 2: Consumption workspace for the Operational Data Store
+    
 
 ![Fabric Setup](image-4.png)
 
