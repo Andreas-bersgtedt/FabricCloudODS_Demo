@@ -11,7 +11,8 @@ One of the patterns that have always been a central part of this in the enterpri
 2.	Support application database consolidation
 3.	Act as an integration layer between Applications and Analytics
 
- ![Image Credit: Athena IT Solutions and ScienseDirect.com](image-1.png)
+![Image Credit: Athena IT Solutions and ScienseDirect.com](image-1.png)
+
 Image Credit: Athena IT Solutions and ScienseDirect.com
 
 The above image depicts how  the ODS have been traditionally implemented and viewed, this implementation has a few challenges in terms of meeting todays demand to be able to provide low latency operational reporting in todays cloud reality where we have many operational systems with databases of many dialects and flavours. We also have new concepts such as AI Agents and self service analytics. 
@@ -35,7 +36,7 @@ Technical design requirements:
 The Solution:
 With the above requirements in mind the data solutions architecture team is considering Microsoft Azure’s PaaS offering combined with Microsoft Fabric as this meets all 6 requirements and supports the vision of global operations and data services.
 
- ![Fabric Cloud ODS Architecture](image-2.png)
+![Fabric Cloud ODS Architecture](image-2.png)
 
 To prove out the proposed design Adventure works have contracted a Solutions Integrator to build out a technical demo.
 
@@ -47,13 +48,16 @@ Azure
 •	Test data: Adventureworks LightWeight database
 •	Transaction velocity: Six sales transaction per second, comprising of 105 database transactions per second.
 •	Azure SQL Managed instance size: General Purpose Standard-series (Gen 5) (4 vCores, 20GB Memory, 64 GB storage, Geo-redundant backup storage)
- ![Azure SQL Setup](image-3.png)
+
+![Azure SQL Setup](image-3.png)
+
 Microsoft Fabric
 •	Fabric SKU: F2 Capacity
 •	Workspace setup: Two workspaces
 o	Workspace 1: Landing zone for the Mirrored Database
 o	Workspace 2: Consumption workspace for the Operational Data Store
- ![Fabric Setup](image-4.png)
+
+![Fabric Setup](image-4.png)
 
 
 
