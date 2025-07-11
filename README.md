@@ -1,4 +1,5 @@
-# FabricCloudODS_DemoThe Resurgence of the Operational Data Store
+# Fabric CloudODS Demo 
+## The Resurgence of the Operational Data Store
 
  ![ODS Purpose](image.png)
 
@@ -66,7 +67,7 @@ Microsoft Fabric
     o	Workspace 1: Landing zone for the Mirrored Database
 
     o	Workspace 2: Consumption workspace for the Operational Data Store
-    
+
 
 ![Fabric Setup](image-4.png)
 
