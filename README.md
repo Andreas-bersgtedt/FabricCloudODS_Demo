@@ -49,7 +49,7 @@ To prove out the proposed design Adventure works have contracted a Solutions Int
 
 •	Source Database: SQL Server 2022 (Standard D2ads v6 (2 vcpus, 8 GiB memory))
 
-•	Test data: [Adventureworks LightWeight database] (https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver17&tabs=ssms)
+•	Test data: [Adventureworks LightWeight database](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver17&tabs=ssms)
 
 •	Transaction velocity: Six sales transaction per second, comprising of 105 database transactions per second.
 
