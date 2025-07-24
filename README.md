@@ -74,7 +74,48 @@ To prove out the proposed design Adventure works have contracted a Solutions Int
 
 
 
-Data movement
+### The Deployment:
+Once the SI has deployed the demo assets in Azure he restores the [Adventureworks Lightweight 2022 database](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver17&tabs=ssms#restore-to-sql-server) on the SQL server he creates the [Transactional Replication](https://learn.microsoft.com/en-us/sql/relational-databases/replication/transactional/transactional-replication?view=sql-server-ver16) publication and creates a push subscription that pushes any changes to the Azure SQL Managed Instance.
+
+Now that the simulated application databases are deployed and the replication is configured and running, he needs to prepare the replica database for Mirroring into Fabric. 
+For this he needs to ensure that there is no constraints or indexes that prevents any tables in the database from being mirrored, he runs the [Drop_incompatible_indexes.sql](/scripts/Drop_incompatible_indexes.sql) scrip against the replicated database on the Azure SQL Managed instance, he then executes the Alter table scripts one by one to ensure that the tables can be mirrored into Microsoft Fabric.
+
+At this point the SI is ready to create the 1st Microsoft Fabric workspace that will act as the Landing Zone, they create a workspace and assign Fabric Capacity.
+
+ 
+
+
+Next the SI creates a Mirrored database for Azure SQL Managed Instance and connect it to the Advetureworks Lightweight database replica.
+ 	 
+
+
+He then confirmes that the Azure SQL Managed Instance database has generated the initial snapshots by executing the following command against the replicated database:
+“EXEC sp_help_change_feed”
+ 
+He then confirms that the Mirrored database in the ODS_POV workspace has been replicated and is accessible.
+
+   
+
+Now that data the replica is created the SI can now start building a data load, he does this by creating a stored procedure using the “Generate_SO.SQL” script.
+In order to simulate a regular flow of transacions he creates a SQL Server Job that executes the new stored procedure every 10 seconds.
+    
+
+
+
+
+
+
+In order to test the performance from latancy from start to finish the SI executes the following SQL Script against the Replicated database:
+ 
+
+The SI then executes the same script against the mirrored SQL endpoint and can observe consistent sub-minute latency.
+ 
+
+The SI Now creates the Consumption Workspace and a Lakehouse that will be used for consumption.
+ 
+The SI ensures that the Lakehouse Schemas is enabled as this will enable him to shortcut entire database schemas from the mirrored database.
+  
+
 
 
 
