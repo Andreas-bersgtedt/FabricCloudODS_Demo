@@ -138,7 +138,7 @@ The SI Now creates the Consumption Workspace and a Lakehouse that will be used f
 
 
 
-He can now create the schema short cuts in the Lakehouse and validate that he can see the data.
+He can now create the schema [shortcut](https://learn.microsoft.com/en-us/fabric/onelake/create-onelake-shortcut) in the Lakehouse and validate that he can see the data.
 
 
 ![Create and validate shortcuts](image-15.png)
