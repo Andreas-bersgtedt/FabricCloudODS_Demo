@@ -115,23 +115,36 @@ and is accessible.
 
 
 Now that data the replica is created the SI can now start building a data load, he does this by creating a stored procedure using the “[Generate_SO.SQL](/scripts/GenerateSO.sql)” script.
-In order to simulate a regular flow of transacions he creates a SQL Server Job that executes the new stored procedure every 10 seconds.
+In order to simulate a regular flow of transacions he creates a [SQL Server Job](https://learn.microsoft.com/en-us/ssms/agent/create-a-job?view=sql-server-ver16) that executes the new stored procedure every 10 seconds.
     
 
+![SQL Job Agent Setup](image-11.png)
 
 
 
 
+In order to test the performance from latancy from start to finish the SI executes the following [SQL Script](/scripts/SalesOrderAgeInSeconds.sql) against the Replicated database:
 
-In order to test the performance from latancy from start to finish the SI executes the following SQL Script against the Replicated database:
+![SSMS SQL Scrip Execution on MI](image-12.png)
  
 
 The SI then executes the same script against the mirrored SQL endpoint and can observe consistent sub-minute latency.
  
+![SSMS SQL Scrip Execution against Mirrored DB](image-13.png) 
 
-The SI Now creates the Consumption Workspace and a Lakehouse that will be used for consumption.
+The SI Now creates the Consumption Workspace and a Lakehouse that will be used for consumption ensuring that the [Lakehouse Schemas](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-schemas) is enabled as this will enable him to shortcut entire database schemas from the mirrored database.
+
+![Create Workspace Dialouge](image-14.png)
+
+
+
+He can now create the schema short cuts in the Lakehouse and validate that he can see the data.
+
+
+![Create and validate shortcuts](image-15.png)
+
  
-The SI ensures that the Lakehouse Schemas is enabled as this will enable him to shortcut entire database schemas from the mirrored database.
+
   
 
 
