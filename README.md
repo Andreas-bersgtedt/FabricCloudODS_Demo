@@ -90,8 +90,13 @@ At this point the SI is ready to create the 1st Microsoft Fabric workspace that 
 
 
 Next the SI creates a [Mirrored database for Azure SQL Managed Instance](https://learn.microsoft.com/en-us/fabric/database/mirrored-database/azure-sql-managed-instance-tutorial) and connect it to the Advetureworks Lightweight database replica.
+He Selects the tables,
 
-![Select Mirrored Tables](image-6.png) ![Name Mirrored DW](image-7.png)
+![Select Mirrored Tables](image-6.png) 
+
+and names the Mirrored Data Warehouse
+
+![Name Mirrored DW](image-7.png)
  	 
 
 
