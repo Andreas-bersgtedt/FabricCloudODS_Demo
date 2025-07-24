@@ -83,6 +83,8 @@ For this he needs to ensure that there is no constraints or indexes that prevent
 he runs the [Drop_incompatible_indexes.sql](/scripts/Drop_incompatible_indexes.sql) scrip against the replicated database on the Azure SQL Managed instance, he then executes the Alter table scripts one by one to ensure that the tables can be mirrored into Microsoft Fabric.
 
 At this point the SI is ready to create the 1st Microsoft Fabric workspace that will act as the Landing Zone, they create a [workspace and assign Fabric Capacity](https://learn.microsoft.com/en-us/fabric/fundamentals/create-workspaces).
+
+
 ![Create Workspace](image-5.png)
  
 
