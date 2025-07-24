@@ -77,10 +77,12 @@ To prove out the proposed design Adventure works have contracted a Solutions Int
 ### The Deployment:
 Once the SI has deployed the demo assets in Azure he restores the [Adventureworks Lightweight 2022 database](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver17&tabs=ssms#restore-to-sql-server) on the SQL server he creates the [Transactional Replication](https://learn.microsoft.com/en-us/sql/relational-databases/replication/transactional/transactional-replication?view=sql-server-ver16) publication and creates a push subscription that pushes any changes to the Azure SQL Managed Instance.
 
-Now that the simulated application databases are deployed and the replication is configured and running, he needs to prepare the replica database for Mirroring into Fabric. 
-For this he needs to ensure that there is no constraints or indexes that prevents any tables in the database from being mirrored, he runs the [Drop_incompatible_indexes.sql](/scripts/Drop_incompatible_indexes.sql) scrip against the replicated database on the Azure SQL Managed instance, he then executes the Alter table scripts one by one to ensure that the tables can be mirrored into Microsoft Fabric.
+Now that the simulated application databases are deployed and the replication is configured and running, he needs to prepare the replica database for Mirroring into Fabric.
 
-At this point the SI is ready to create the 1st Microsoft Fabric workspace that will act as the Landing Zone, they create a workspace and assign Fabric Capacity.
+For this he needs to ensure that there is no constraints or indexes that prevents any tables in the database from being mirrored, 
+he runs the [Drop_incompatible_indexes.sql](/scripts/Drop_incompatible_indexes.sql) scrip against the replicated database on the Azure SQL Managed instance, he then executes the Alter table scripts one by one to ensure that the tables can be mirrored into Microsoft Fabric.
+
+At this point the SI is ready to create the 1st Microsoft Fabric workspace that will act as the Landing Zone, they create a [workspace and assign Fabric Capacity](https://learn.microsoft.com/en-us/fabric/fundamentals/create-workspaces).
 
  
 
