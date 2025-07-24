@@ -94,18 +94,25 @@ He Selects the tables,
 
 ![Select Mirrored Tables](image-6.png) 
 
-and names the Mirrored Data Warehouse
+and names the Mirrored Data Warehouse.
 
 ![Name Mirrored DW](image-7.png)
  	 
 
 
 He then confirms that the Azure SQL Managed Instance database has generated the initial snapshots by executing the following command against the replicated database:
-“EXEC sp_help_change_feed”
+***“EXEC sp_help_change_feed”***
  
-He then confirms that the Mirrored database in the ODS_POV workspace has been replicated and is accessible.
+![sp_help_change_feed in SSMS](image-8.png)
 
-   
+He then confirms that the Mirrored database in the ODS_POV workspace has been replicated 
+
+![Mirrored database status](image-9.png)
+
+and is accessible.
+
+![Select statement in Fabric](image-10.png)
+
 
 Now that data the replica is created the SI can now start building a data load, he does this by creating a stored procedure using the “Generate_SO.SQL” script.
 In order to simulate a regular flow of transacions he creates a SQL Server Job that executes the new stored procedure every 10 seconds.
