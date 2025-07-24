@@ -114,7 +114,7 @@ and is accessible.
 ![Select statement in Fabric](image-10.png)
 
 
-Now that data the replica is created the SI can now start building a data load, he does this by creating a stored procedure using the “Generate_SO.SQL” script.
+Now that data the replica is created the SI can now start building a data load, he does this by creating a stored procedure using the “[Generate_SO.SQL](/scripts/GenerateSO.sql)” script.
 In order to simulate a regular flow of transacions he creates a SQL Server Job that executes the new stored procedure every 10 seconds.
     
 
