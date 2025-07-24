@@ -89,11 +89,13 @@ At this point the SI is ready to create the 1st Microsoft Fabric workspace that 
  
 
 
-Next the SI creates a Mirrored database for Azure SQL Managed Instance and connect it to the Advetureworks Lightweight database replica.
+Next the SI creates a [Mirrored database for Azure SQL Managed Instance](https://learn.microsoft.com/en-us/fabric/database/mirrored-database/azure-sql-managed-instance-tutorial) and connect it to the Advetureworks Lightweight database replica.
+
+![Select Mirrored Tables](image-6.png) ![Name Mirrored DW](image-7.png)
  	 
 
 
-He then confirmes that the Azure SQL Managed Instance database has generated the initial snapshots by executing the following command against the replicated database:
+He then confirms that the Azure SQL Managed Instance database has generated the initial snapshots by executing the following command against the replicated database:
 “EXEC sp_help_change_feed”
  
 He then confirms that the Mirrored database in the ODS_POV workspace has been replicated and is accessible.
