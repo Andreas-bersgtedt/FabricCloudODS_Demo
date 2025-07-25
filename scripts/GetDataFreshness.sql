@@ -1,0 +1,10 @@
+CREATE PROCEDURE SalesLT.GetDataFreshness
+AS
+BEGIN
+DECLARE @START AS DATETIME2(6) = GETUTCDATE()
+DECLARE @Seconds AS INT =(
+SELECT SalesOrderAgeInSeconds=DATEDIFF(SECOND ,MAX([ModifiedDate]),GETUTCDATE())
+  FROM [SalesLT].[SalesOrderDetail])
+
+SELECT Start_TS = @START , DATA_AGE=@Seconds, E2E_Query_Responce_MS=DATEDIFF(Millisecond,@START,GETUTCDATE()),End_TS=GETUTCDATE()
+END
