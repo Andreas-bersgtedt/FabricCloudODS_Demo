@@ -1,4 +1,4 @@
-# Fabric CloudODS Demo 
+# Fabric Cloud ODS Demo 
 ## The Resurgence of the Operational Data Store
 
  ![ODS Purpose](image.png)
