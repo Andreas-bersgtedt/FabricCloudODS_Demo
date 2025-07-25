@@ -161,39 +161,48 @@ He Creates a [PowerBI Dashboard](/Templates/SO%20Dashboard.pbit) that can be use
 ![Power BI SO Dashboard](image-18.png)
 
  
-The team also creates a stored procedure using the GetDataFreshness.sql script in the Analytics endpoint of the POV_Analytics Lakehouse that will be used as a data source for the Query Performance testing.
+The team also creates a stored procedure using the [GetDataFreshness.sql](/scripts/GetDataFreshness.sql) script in the Analytics endpoint of the POV_Analytics Lakehouse that will be used as a data source for the Query Performance testing.
+
+![GetDataFreshness.sql in Fabric](image-19.png)
  
 
-Next the team creates a GraphQL Data API to test query performance and response for their data API requirement.
+Next the team creates a [GraphQL Data API](https://learn.microsoft.com/en-us/fabric/data-engineering/get-started-api-graphql) to test query performance and response for their data API requirement.
+
+![Create GraphQL Data API](image-20.png)
  
 They select Fabric data sources with single sign-on (SSO) and the SalesLT.GetDataFreshness stored procedure for the Pov_Analytics Lakehouse.
+
+![GraphGL Get Data](image-21.png)
    
-They are now ready to test performance for the data API, they use the rest_API_Query.json script and can clearly see the stored procedure performance.
- 
+They are now ready to test performance for the data API, they use the [rest_API_Query.json](/scripts/rest_API_Query.json) script and can clearly see the stored procedure performance.
 
-The Agentic Experience
+![QraphQL Query Execution](image-22.png) 
 
-The team pivots to the final requirement to be able to serve a self-service Fabric Data Agent that can be used for natural language queries and an be extended into Copilot studio and extended further using AI foundry to build an in app agentic experience for its customers.
+### The Agentic Experience
+
+The team pivots to the final requirement to be able to serve a self-service [Fabric Data Agent](https://learn.microsoft.com/en-us/fabric/data-science/how-to-create-data-agent) that can be used for natural language queries and an be extended into [Copilot studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/fundamentals-what-is-copilot-studio) and extended further using [AI foundry](https://learn.microsoft.com/en-us/azure/ai-foundry/what-is-azure-ai-foundry) to build an in app agentic experience for its customers.
+
 To start off the team creates a Data Agent called SO_Data_Agent.
+
+![Create Data Agent](image-23.png)
  
 They Add the Pov_Analytics Lakehouse and select the Customer, Product, SalesOrderDetail and SalesOrderHeader tables.
 
 They now test the data agent with a simple question:
-“What customer has the highest sales amount in the last 24 hours”
+***“What customer has the highest sales amount in the last 24 hours”***
 
 This successfully identifies “Action Bicycle Specialists” as the customer with the highest sales amount in the last 24 hours.
- 
+
+![Action Bicycle Specialists](image-24.png)
+
 When asked “What top 5 products has Action Bicycle Specialists bought in the last 48 hours?” the agent correctly lists the top 5 products by order quantity.
  
-
-
-
-
+![What top 5 products has Action Bicycle Specialists bought in the last 48 hours?](image-25.png)
 
 
 When asked follow up questions about “what product has generated the most revenue for Action Bicycle Specialists in the last 48 hours?” the agent correctly lists product 957.
  
-
+![what product has generated the most revenue](image-26.png)
 
 
 
