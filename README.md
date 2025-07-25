@@ -206,6 +206,9 @@ When asked follow up questions about “what product has generated the most reve
 
 
 
+### Conclusion of the POV
+
+The solutions integrator concludes in it’s final findings report that the Design and business requirements were met in the POV.
 
 
 
