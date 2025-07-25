@@ -152,9 +152,14 @@ In order to test the operational reporting consumption, they now create a [Power
 
  	 
 
-In the PowerBI Semantic model they now create a few base measures to simulate the sales order dashboard and the data freshness.
+In the PowerBI Semantic model they now create a few base [measures](https://learn.microsoft.com/en-us/power-bi/transform-model/service-edit-data-models#create-measures) to simulate the sales order dashboard and the data freshness.
+
+![PowerBI Measures](image-17.png)
  
-He Creates a PowerBI Dashboard that can be used to monitor the sales order transactions over time and to see the data freshness.
+He Creates a [PowerBI Dashboard](/Templates/SO%20Dashboard.pbit) that can be used to monitor the sales order transactions over time and to see the data freshness.
+
+![Power BI SO Dashboard](image-18.png)
+
  
 The team also creates a stored procedure using the GetDataFreshness.sql script in the Analytics endpoint of the POV_Analytics Lakehouse that will be used as a data source for the Query Performance testing.
  
