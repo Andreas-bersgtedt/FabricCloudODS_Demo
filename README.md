@@ -146,7 +146,9 @@ He can now create the schema [shortcut](https://learn.microsoft.com/en-us/fabric
  
 
   
-In order to test the operational reporting consumption, they now create a PowerBI Semantic model in direct lake mode.
+In order to test the operational reporting consumption, they now create a [PowerBI Semantic model](https://learn.microsoft.com/en-us/fabric/fundamentals/lakehouse-power-bi-reporting) in direct lake mode.
+
+![PowerBI Semantic model](image-16.png)
 
  	 
 
