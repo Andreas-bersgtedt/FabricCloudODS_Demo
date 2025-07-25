@@ -146,6 +146,49 @@ He can now create the schema [shortcut](https://learn.microsoft.com/en-us/fabric
  
 
   
+In order to test the operational reporting consumption, they now create a PowerBI Semantic model in direct lake mode.
+
+ 	 
+
+In the PowerBI Semantic model they now create a few base measures to simulate the sales order dashboard and the data freshness.
+ 
+He Creates a PowerBI Dashboard that can be used to monitor the sales order transactions over time and to see the data freshness.
+ 
+The team also creates a stored procedure using the GetDataFreshness.sql script in the Analytics endpoint of the POV_Analytics Lakehouse that will be used as a data source for the Query Performance testing.
+ 
+
+Next the team creates a GraphQL Data API to test query performance and response for their data API requirement.
+ 
+They select Fabric data sources with single sign-on (SSO) and the SalesLT.GetDataFreshness stored procedure for the Pov_Analytics Lakehouse.
+   
+They are now ready to test performance for the data API, they use the rest_API_Query.json script and can clearly see the stored procedure performance.
+ 
+
+The Agentic Experience
+
+The team pivots to the final requirement to be able to serve a self-service Fabric Data Agent that can be used for natural language queries and an be extended into Copilot studio and extended further using AI foundry to build an in app agentic experience for its customers.
+To start off the team creates a Data Agent called SO_Data_Agent.
+ 
+They Add the Pov_Analytics Lakehouse and select the Customer, Product, SalesOrderDetail and SalesOrderHeader tables.
+
+They now test the data agent with a simple question:
+“What customer has the highest sales amount in the last 24 hours”
+
+This successfully identifies “Action Bicycle Specialists” as the customer with the highest sales amount in the last 24 hours.
+ 
+When asked “What top 5 products has Action Bicycle Specialists bought in the last 48 hours?” the agent correctly lists the top 5 products by order quantity.
+ 
+
+
+
+
+
+
+When asked follow up questions about “what product has generated the most revenue for Action Bicycle Specialists in the last 48 hours?” the agent correctly lists product 957.
+ 
+
+
+
 
 
 
