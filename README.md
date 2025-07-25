@@ -1,7 +1,7 @@
 # Fabric Cloud ODS Demo 
 ## The Resurgence of the Operational Data Store
 
- ![ODS Purpose](image.png)
+ ![ODS Purpose](/images/image.png)
 
 
 Since the beginning of multi-user applications such as ERP, CRM, TMS and ITSM applications there has been a need to be able to display operational dashboards to monitor phone queues, stock levels, team performance and  general ops.
@@ -12,7 +12,7 @@ One of the patterns that have always been a central part of this in the enterpri
 2.	Support application database consolidation
 3.	Act as an integration layer between Applications and Analytics
 
-![Image Credit: Athena IT Solutions and ScienseDirect.com](image-1.png)
+![Image Credit: Athena IT Solutions and ScienseDirect.com](/images/image-1.png)
 
 Image Credit: Athena IT Solutions and ScienseDirect.com
 
@@ -37,7 +37,7 @@ The global operations business unit of Adventure works wants to create a consist
 ## The Solution:
 With the above requirements in mind the data solutions architecture team is considering Microsoft Azure’s PaaS offering combined with Microsoft Fabric as this meets all 6 requirements and supports the vision of global operations and data services.
 
-![Fabric Cloud ODS Architecture](image-2.png)
+![Fabric Cloud ODS Architecture](/images/image-2.png)
 
 To prove out the proposed design Adventure works have contracted a Solutions Integrator to build out a technical demo.
 
@@ -56,7 +56,7 @@ To prove out the proposed design Adventure works have contracted a Solutions Int
 •	Azure SQL Managed instance size: General Purpose Standard-series (Gen 5) (4 vCores, 20GB Memory, 64 GB storage, Geo-redundant backup storage)
 
 
-![Azure SQL Setup](image-3.png)
+![Azure SQL Setup](/images/image-3.png)
 
 ### Microsoft Fabric
 
@@ -69,7 +69,7 @@ To prove out the proposed design Adventure works have contracted a Solutions Int
     o	Workspace 2: Consumption workspace for the Operational Data Store
 
 
-![Fabric Setup](image-4.png)
+![Fabric Setup](/images/image-4.png)
 
 
 
@@ -85,98 +85,98 @@ he runs the [Drop_incompatible_indexes.sql](/scripts/Drop_incompatible_indexes.s
 At this point the SI is ready to create the 1st Microsoft Fabric workspace that will act as the Landing Zone, they create a [workspace and assign Fabric Capacity](https://learn.microsoft.com/en-us/fabric/fundamentals/create-workspaces).
 
 
-![Create Workspace](image-5.png)
+![Create Workspace](/images/image-5.png)
  
 
 
 Next the SI creates a [Mirrored database for Azure SQL Managed Instance](https://learn.microsoft.com/en-us/fabric/database/mirrored-database/azure-sql-managed-instance-tutorial) and connect it to the Advetureworks Lightweight database replica.
 He Selects the tables,
 
-![Select Mirrored Tables](image-6.png) 
+![Select Mirrored Tables](/images/image-6.png) 
 
 and names the Mirrored Data Warehouse.
 
-![Name Mirrored DW](image-7.png)
+![Name Mirrored DW](/images/image-7.png)
  	 
 
 
 He then confirms that the Azure SQL Managed Instance database has generated the initial snapshots by executing the following command against the replicated database:
 ***“EXEC sp_help_change_feed”***
  
-![sp_help_change_feed in SSMS](image-8.png)
+![sp_help_change_feed in SSMS](/images/image-8.png)
 
 He then confirms that the Mirrored database in the ODS_POV workspace has been replicated 
 
-![Mirrored database status](image-9.png)
+![Mirrored database status](/images/image-9.png)
 
 and is accessible.
 
-![Select statement in Fabric](image-10.png)
+![Select statement in Fabric](/images/image-10.png)
 
 
 Now that data the replica is created the SI can now start building a data load, he does this by creating a stored procedure using the “[Generate_SO.SQL](/scripts/GenerateSO.sql)” script.
 In order to simulate a regular flow of transacions he creates a [SQL Server Job](https://learn.microsoft.com/en-us/ssms/agent/create-a-job?view=sql-server-ver16) that executes the new stored procedure every 10 seconds.
     
 
-![SQL Job Agent Setup](image-11.png)
+![SQL Job Agent Setup](/images/image-11.png)
 
 
 
 
 In order to test the performance from latancy from start to finish the SI executes the following [SQL Script](/scripts/SalesOrderAgeInSeconds.sql) against the Replicated database:
 
-![SSMS SQL Scrip Execution on MI](image-12.png)
+![SSMS SQL Scrip Execution on MI](/images/image-12.png)
  
 
 The SI then executes the same script against the mirrored SQL endpoint and can observe consistent sub-minute latency.
  
-![SSMS SQL Scrip Execution against Mirrored DB](image-13.png) 
+![SSMS SQL Scrip Execution against Mirrored DB](/images/image-13.png) 
 
 The SI Now creates the Consumption Workspace and a Lakehouse that will be used for consumption ensuring that the [Lakehouse Schemas](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-schemas) is enabled as this will enable him to shortcut entire database schemas from the mirrored database.
 
-![Create Workspace Dialouge](image-14.png)
+![Create Workspace Dialouge](/images/image-14.png)
 
 
 
 He can now create the schema [shortcut](https://learn.microsoft.com/en-us/fabric/onelake/create-onelake-shortcut) in the Lakehouse and validate that he can see the data.
 
 
-![Create and validate shortcuts](image-15.png)
+![Create and validate shortcuts](/images/image-15.png)
 
  
 
   
 In order to test the operational reporting consumption, they now create a [PowerBI Semantic model](https://learn.microsoft.com/en-us/fabric/fundamentals/lakehouse-power-bi-reporting) in direct lake mode.
 
-![PowerBI Semantic model](image-16.png)
+![PowerBI Semantic model](/images/image-16.png)
 
  	 
 
 In the PowerBI Semantic model they now create a few base [measures](https://learn.microsoft.com/en-us/power-bi/transform-model/service-edit-data-models#create-measures) to simulate the sales order dashboard and the data freshness.
 
-![PowerBI Measures](image-17.png)
+![PowerBI Measures](/images/image-17.png)
  
 He Creates a [PowerBI Dashboard](/Templates/SO%20Dashboard.pbit) that can be used to monitor the sales order transactions over time and to see the data freshness.
 
-![Power BI SO Dashboard](image-18.png)
+![Power BI SO Dashboard](/images/image-18.png)
 
  
 The team also creates a stored procedure using the [GetDataFreshness.sql](/scripts/GetDataFreshness.sql) script in the Analytics endpoint of the POV_Analytics Lakehouse that will be used as a data source for the Query Performance testing.
 
-![GetDataFreshness.sql in Fabric](image-19.png)
+![GetDataFreshness.sql in Fabric](/images/image-19.png)
  
 
 Next the team creates a [GraphQL Data API](https://learn.microsoft.com/en-us/fabric/data-engineering/get-started-api-graphql) to test query performance and response for their data API requirement.
 
-![Create GraphQL Data API](image-20.png)
+![Create GraphQL Data API](/images/image-20.png)
  
 They select Fabric data sources with single sign-on (SSO) and the SalesLT.GetDataFreshness stored procedure for the Pov_Analytics Lakehouse.
 
-![GraphGL Get Data](image-21.png)
+![GraphGL Get Data](/images/image-21.png)
    
 They are now ready to test performance for the data API, they use the [rest_API_Query.json](/scripts/rest_API_Query.json) script and can clearly see the stored procedure performance.
 
-![QraphQL Query Execution](image-22.png) 
+![QraphQL Query Execution](/images/image-22.png) 
 
 ### The Agentic Experience
 
@@ -184,7 +184,7 @@ The team pivots to the final requirement to be able to serve a self-service [Fab
 
 To start off the team creates a Data Agent called SO_Data_Agent.
 
-![Create Data Agent](image-23.png)
+![Create Data Agent](/images/image-23.png)
  
 They Add the Pov_Analytics Lakehouse and select the Customer, Product, SalesOrderDetail and SalesOrderHeader tables.
 
@@ -193,16 +193,16 @@ They now test the data agent with a simple question:
 
 This successfully identifies “Action Bicycle Specialists” as the customer with the highest sales amount in the last 24 hours.
 
-![Action Bicycle Specialists](image-24.png)
+![Action Bicycle Specialists](/images/image-24.png)
 
 When asked “What top 5 products has Action Bicycle Specialists bought in the last 48 hours?” the agent correctly lists the top 5 products by order quantity.
  
-![What top 5 products has Action Bicycle Specialists bought in the last 48 hours?](image-25.png)
+![What top 5 products has Action Bicycle Specialists bought in the last 48 hours?](/images/image-25.png)
 
 
 When asked follow up questions about “what product has generated the most revenue for Action Bicycle Specialists in the last 48 hours?” the agent correctly lists product 957.
  
-![what product has generated the most revenue](image-26.png)
+![what product has generated the most revenue](/images/image-26.png)
 
 
 
