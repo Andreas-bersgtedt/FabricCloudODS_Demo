@@ -1,0 +1,7 @@
+query{executeGetDataFreshness {
+   Start_TS
+   ,DATA_AGE
+   ,E2E_Query_Responce_MS
+   ,End_TS
+   
+}}
