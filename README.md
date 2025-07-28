@@ -75,14 +75,14 @@ To prove out the proposed design Adventure works have contracted a Solutions Int
 
 
 ### The Deployment:
-Once the SI has deployed the demo assets in Azure he restores the [Adventureworks Lightweight 2022 database](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver17&tabs=ssms#restore-to-sql-server) on the SQL server he creates the [Transactional Replication](https://learn.microsoft.com/en-us/sql/relational-databases/replication/transactional/transactional-replication?view=sql-server-ver16) publication and creates a push subscription that pushes any changes to the Azure SQL Managed Instance.
+Once you have deployed the demo assets in Azure, restore the [Adventureworks Lightweight 2022 database](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver17&tabs=ssms#restore-to-sql-server) on the SQL server. Next, create the [Transactional Replication](https://learn.microsoft.com/en-us/sql/relational-databases/replication/transactional/transactional-replication?view=sql-server-ver16) publication and create a push subscription that pushes any changes to the Azure SQL Managed Instance.
 
-Now that the simulated application databases are deployed and the replication is configured and running, he needs to prepare the replica database for Mirroring into Fabric.
+Now that the simulated application databases are deployed and the replication is configured and running, you need to prepare the replica database for Mirroring into Fabric.
 
-For this he needs to ensure that there is no constraints or indexes that prevents any tables in the database from being mirrored, 
-he runs the [Drop_incompatible_indexes.sql](/scripts/Drop_incompatible_indexes.sql) scrip against the replicated database on the Azure SQL Managed instance, he then executes the Alter table scripts one by one to ensure that the tables can be mirrored into Microsoft Fabric.
+For this, you must ensure that there are no constraints or indexes that prevent any tables in the database from being mirrored. 
+Run the [Drop_incompatible_indexes.sql](/scripts/Drop_incompatible_indexes.sql) script against the replicated database on the Azure SQL Managed instance, then execute the Alter table scripts one by one to ensure that the tables can be mirrored into Microsoft Fabric.
 
-At this point the SI is ready to create the 1st Microsoft Fabric workspace that will act as the Landing Zone, they create a [workspace and assign Fabric Capacity](https://learn.microsoft.com/en-us/fabric/fundamentals/create-workspaces).
+At this point you are ready to create the first Microsoft Fabric workspace that will act as the Landing Zone. Create a [workspace and assign Fabric Capacity](https://learn.microsoft.com/en-us/fabric/fundamentals/create-workspaces).
 
 
 ![Create Workspace](/images/image-5.png)
@@ -123,22 +123,22 @@ In order to simulate a regular flow of transacions he creates a [SQL Server Job]
 
 
 
-In order to test the performance from latancy from start to finish the SI executes the following [SQL Script](/scripts/SalesOrderAgeInSeconds.sql) against the Replicated database:
+To test the performance latency from start to finish, execute the following [SQL Script](/scripts/SalesOrderAgeInSeconds.sql) against the Replicated database:
 
 ![SSMS SQL Scrip Execution on MI](/images/image-12.png)
  
 
-The SI then executes the same script against the mirrored SQL endpoint and can observe consistent sub-minute latency.
+Then execute the same script against the mirrored SQL endpoint and observe the consistent sub-minute latency.
  
 ![SSMS SQL Scrip Execution against Mirrored DB](/images/image-13.png) 
 
-The SI Now creates the Consumption Workspace and a Lakehouse that will be used for consumption ensuring that the [Lakehouse Schemas](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-schemas) is enabled as this will enable him to shortcut entire database schemas from the mirrored database.
+Next, create the Consumption Workspace and a Lakehouse that will be used for consumption, ensuring that the [Lakehouse Schemas](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-schemas) is enabled as this will enable you to shortcut entire database schemas from the mirrored database.
 
 ![Create Workspace Dialouge](/images/image-14.png)
 
 
 
-He can now create the schema [shortcut](https://learn.microsoft.com/en-us/fabric/onelake/create-onelake-shortcut) in the Lakehouse and validate that he can see the data.
+You can now create the schema [shortcut](https://learn.microsoft.com/en-us/fabric/onelake/create-onelake-shortcut) in the Lakehouse and validate that you can see the data.
 
 
 ![Create and validate shortcuts](/images/image-15.png)
@@ -146,49 +146,49 @@ He can now create the schema [shortcut](https://learn.microsoft.com/en-us/fabric
  
 
   
-In order to test the operational reporting consumption, they now create a [PowerBI Semantic model](https://learn.microsoft.com/en-us/fabric/fundamentals/lakehouse-power-bi-reporting) in direct lake mode.
+To test the operational reporting consumption, create a [PowerBI Semantic model](https://learn.microsoft.com/en-us/fabric/fundamentals/lakehouse-power-bi-reporting) in direct lake mode.
 
 ![PowerBI Semantic model](/images/image-16.png)
 
  	 
 
-In the PowerBI Semantic model they now create a few base [measures](https://learn.microsoft.com/en-us/power-bi/transform-model/service-edit-data-models#create-measures) to simulate the sales order dashboard and the data freshness.
+In the PowerBI Semantic model, create a few base [measures](https://learn.microsoft.com/en-us/power-bi/transform-model/service-edit-data-models#create-measures) to simulate the sales order dashboard and the data freshness.
 
 ![PowerBI Measures](/images/image-17.png)
  
-He Creates a [PowerBI Dashboard](/Templates/SO%20Dashboard.pbit) that can be used to monitor the sales order transactions over time and to see the data freshness.
+Create a [PowerBI Dashboard](/Templates/SO%20Dashboard.pbit) that can be used to monitor the sales order transactions over time and to see the data freshness.
 
 ![Power BI SO Dashboard](/images/image-18.png)
 
  
-The team also creates a stored procedure using the [GetDataFreshness.sql](/scripts/GetDataFreshness.sql) script in the Analytics endpoint of the POV_Analytics Lakehouse that will be used as a data source for the Query Performance testing.
+Also create a stored procedure using the [GetDataFreshness.sql](/scripts/GetDataFreshness.sql) script in the Analytics endpoint of the POV_Analytics Lakehouse that will be used as a data source for the Query Performance testing.
 
 ![GetDataFreshness.sql in Fabric](/images/image-19.png)
  
 
-Next the team creates a [GraphQL Data API](https://learn.microsoft.com/en-us/fabric/data-engineering/get-started-api-graphql) to test query performance and response for their data API requirement.
+Next, create a [GraphQL Data API](https://learn.microsoft.com/en-us/fabric/data-engineering/get-started-api-graphql) to test query performance and response for your data API requirement.
 
 ![Create GraphQL Data API](/images/image-20.png)
  
-They select Fabric data sources with single sign-on (SSO) and the SalesLT.GetDataFreshness stored procedure for the Pov_Analytics Lakehouse.
+Select Fabric data sources with single sign-on (SSO) and the SalesLT.GetDataFreshness stored procedure for the Pov_Analytics Lakehouse.
 
 ![GraphGL Get Data](/images/image-21.png)
    
-They are now ready to test performance for the data API, they use the [rest_API_Query.json](/scripts/rest_API_Query.json) script and can clearly see the stored procedure performance.
+You are now ready to test performance for the data API. Use the [rest_API_Query.json](/scripts/rest_API_Query.json) script and you can clearly see the stored procedure performance.
 
 ![QraphQL Query Execution](/images/image-22.png) 
 
 ### The Agentic Experience
 
-The team pivots to the final requirement to be able to serve a self-service [Fabric Data Agent](https://learn.microsoft.com/en-us/fabric/data-science/how-to-create-data-agent) that can be used for natural language queries and an be extended into [Copilot studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/fundamentals-what-is-copilot-studio) and extended further using [AI foundry](https://learn.microsoft.com/en-us/azure/ai-foundry/what-is-azure-ai-foundry) to build an in app agentic experience for its customers.
+Next, pivot to the final requirement to be able to serve a self-service [Fabric Data Agent](https://learn.microsoft.com/en-us/fabric/data-science/how-to-create-data-agent) that can be used for natural language queries and can be extended into [Copilot studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/fundamentals-what-is-copilot-studio) and extended further using [AI foundry](https://learn.microsoft.com/en-us/azure/ai-foundry/what-is-azure-ai-foundry) to build an in app agentic experience for your customers.
 
-To start off the team creates a Data Agent called SO_Data_Agent.
+To start, create a Data Agent called SO_Data_Agent.
 
 ![Create Data Agent](/images/image-23.png)
  
-They Add the Pov_Analytics Lakehouse and select the Customer, Product, SalesOrderDetail and SalesOrderHeader tables.
+Add the Pov_Analytics Lakehouse and select the Customer, Product, SalesOrderDetail and SalesOrderHeader tables.
 
-They now test the data agent with a simple question:
+Now test the data agent with a simple question:
 ***“What customer has the highest sales amount in the last 24 hours”***
 
 This successfully identifies “Action Bicycle Specialists” as the customer with the highest sales amount in the last 24 hours.
