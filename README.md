@@ -39,7 +39,7 @@ With the above requirements in mind the data solutions architecture team is cons
 
 ![Fabric Cloud ODS Architecture](/images/image-2.png)
 
-To prove out the proposed design Adventure works have contracted a Solutions Integrator to build out a technical demo.
+To prove out the proposed design Adventure works have contracted **you** as a Solutions Integrator to build out a technical demo.
 
 
 
