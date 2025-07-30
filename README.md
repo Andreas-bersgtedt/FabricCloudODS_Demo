@@ -209,7 +209,7 @@ When asked follow up questions about “what product has generated the most reve
 
 ### Conclusion of the POV
 
-To conclude we can clearly see that we have managed to implement an architecture and solution that meet ***all the design and business requirements that were*** set out in the [solutions overview section](/FabricCloudODS_Demo#scenario-brief) above.
+To conclude we can clearly see that we have managed to implement an architecture and solution that meet ***all the design and business requirements that were*** set out in the [solutions overview section](/README.mde#scenario-brief) above.
 
 
 
