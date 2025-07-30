@@ -89,23 +89,24 @@ At this point you are ready to create the first Microsoft Fabric workspace that 
  
 
 
-Next the SI creates a [Mirrored database for Azure SQL Managed Instance](https://learn.microsoft.com/en-us/fabric/database/mirrored-database/azure-sql-managed-instance-tutorial) and connect it to the Advetureworks Lightweight database replica.
-He Selects the tables,
+Next create a [Mirrored database for Azure SQL Managed Instance](https://learn.microsoft.com/en-us/fabric/database/mirrored-database/azure-sql-managed-instance-tutorial) and connect it to the Advetureworks Lightweight database replica.
+
+Selects the tables,
 
 ![Select Mirrored Tables](/images/image-6.png) 
 
-and names the Mirrored Data Warehouse.
+and name the Mirrored Data Warehouse as ***AdventureWorksLT2022***.
 
 ![Name Mirrored DW](/images/image-7.png)
  	 
 
 
-He then confirms that the Azure SQL Managed Instance database has generated the initial snapshots by executing the following command against the replicated database:
+Confirm that the Azure SQL Managed Instance database has generated the initial snapshots by executing the following command against the replicated database:
 ***“EXEC sp_help_change_feed”***
  
 ![sp_help_change_feed in SSMS](/images/image-8.png)
 
-He then confirms that the Mirrored database in the ODS_POV workspace has been replicated 
+Confirms that the Mirrored database in the ODS_POV workspace has been replicated 
 
 ![Mirrored database status](/images/image-9.png)
 
@@ -114,8 +115,8 @@ and is accessible.
 ![Select statement in Fabric](/images/image-10.png)
 
 
-Now that data the replica is created the SI can now start building a data load, he does this by creating a stored procedure using the “[Generate_SO.SQL](/scripts/GenerateSO.sql)” script.
-In order to simulate a regular flow of transacions he creates a [SQL Server Job](https://learn.microsoft.com/en-us/ssms/agent/create-a-job?view=sql-server-ver16) that executes the new stored procedure every 10 seconds.
+Now that data the replica is created, you can now start building a data load, do this by creating a stored procedure using the “[Generate_SO.SQL](/scripts/GenerateSO.sql)” script.
+In order to simulate a regular flow of transacions create a [SQL Server Job](https://learn.microsoft.com/en-us/ssms/agent/create-a-job?view=sql-server-ver16) that executes the new stored procedure every 10 seconds.
     
 
 ![SQL Job Agent Setup](/images/image-11.png)
