@@ -213,3 +213,38 @@ The solutions integrator concludes in it’s final findings report that the Desi
 
 
 
+## Governance and compliance review
+
+During the testing by the AdventureWorks data services business team, they conducted a compliance review that triggered an audit finding pertaining to sensitive information. 
+
+![Microsoft Purview Data Map](/images/sec_image.png)  
+
+
+In the SalesLT.Customer table contains encryption data for user passwords that cannot be stored in an analytical data store according to the corporate data protection policies and therefore needs to be removed.
+You are again asked to commission a solution that automatically and persistently removes the data from the sensitive columns prior to being mirrored into the Fabric Mirrored database.
+
+As the lead architect on the project you conclude that in order to comply with the requirements you will need to use a SQL Server trigger on the SalesLT.Customer table that blanks out the data in the PasswordHash and PasswordSalt columns when data is inserted or updates in the application database.
+
+Your reasoning is as follows:
+
+1.	A trigger supports SQL Server replication
+2.	A trigger will persist the solution
+3.	A trigger is the least administrative effort
+
+To test this you execute the “[RemovePassword_trigger.sql](/scripts/RemovePassword_trigger.sql)” SQL script against the Replicated database.
+ 
+![SSMS RemovePassword trigger script](/images/sec_image-1.png)
+
+To test the new trigger and to confirm that the data is removed from the replication server and into the Microsoft Fabric Mirrored ODS you now run a benign update on the SalesLT.Customer source table on the application database.
+
+![SSMS Update script](/images/sec_image-2.png)
+
+You can now see the change propagated to the replication database
+
+ ![SSMS Redacted screenshot MI](/images/sec_image-3.png)
+
+And Also into the Fabric Mirrored Database and the final consumption layer:
+
+![Fabric Redacted Screenshot LH](/images/sec_image-4.png) 
+
+With this you have now created a fully compliant solution that prevents any accidental exposure of sensitive data that can be leaked via the operational data store.
