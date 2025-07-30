@@ -209,7 +209,7 @@ When asked follow up questions about “what product has generated the most reve
 
 ### Conclusion of the POV
 
-The solutions integrator concludes in it’s final findings report that the Design and business requirements were met in the POV.
+To conclude we can clearly see that we have managed to implement an architecture and solution that meet ***all the design and business requirements that were*** set out in the solutions overview section above.
 
 
 
