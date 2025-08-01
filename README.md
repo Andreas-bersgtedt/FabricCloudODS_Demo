@@ -1,5 +1,24 @@
 # Fabric Cloud ODS Demo 
-This 
+
+This document is based on an actual customer use case, the aim of publishing this solution is to highlight that as technology evolves it often breeds life into architectures and solutions that are considered "legacy" by "modern" standards, it is at these moments that we realise that the "modern" architectures have inferred a huge technical debt by solving a low latency problem by creating downstream complexities. 
+An example of this is the promise of microservices architecture, 
+it solves many problems in the CI/CD realm and offers resilience from code changes in other applications, it does however introduce challenges when you need a consolidation of a user’s experience, or an aggregated view of the state of affairs in the entire clientele.
+
+If we take the following scenario as an example:
+
+![Micro Service Architecture](image.png)
+
+Here we have a typical micro service architecture, each micro service can deploy and transact on it's own and stores only it's own transactional data, this is highly scalable and extremely flexible when it comes to app development, but it causes issues when we need to understand the whole picture of a customer’s order history and shopping behaviour.
+In this scenario what normally happens is that we hang an enterprise message bus behind the micro services where each service will publish it's transactions.
+ 
+![Data Processing Diagram](image-1.png) 
+
+what we are now left with is a streaming data source like EventHub or Kafka. 
+In order for us to consume this data for a dashboard we need to aggregate and transform this data into a common layer fit for consumption, our first challenge is that we need to process all this stream data, here we introduce complexities such as throughput pressure and schema management, we also need to have a historical reference loop so that we can handle change markers, keys and general filtering, once we have this we then need to store this and ensure that we can manage inserts, updates and deletes, at this point we have introduced multiple engineering processes and complexities and we haven’t even started with the consumption layer.
+
+It is easy to see that we are increasing points of failure and latency, we are also starting to create a process that is not fault tolerant, for instance if we need to reprocess our data stores due to an outage or data corruption we will need to re-ship the data from the application databases as the streaming environment has relatively short retention, this also applies to back pressure as I have seen in the past how increased publishing of events can cause consumption delays in downstream processing.  
+
+
 ## The Resurgence of the Operational Data Store
 
  ![ODS Purpose](/images/image.png)
