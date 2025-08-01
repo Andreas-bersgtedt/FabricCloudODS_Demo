@@ -10,8 +10,8 @@ If we take the following scenario as an example:
 
 Here we have a typical micro service architecture, each micro service can deploy and transact on it's own and stores only it's own transactional data, this is highly scalable and extremely flexible when it comes to app development, but it causes issues when we need to understand the whole picture of a customer’s order history and shopping behaviour.
 In this scenario what normally happens is that we hang an enterprise message bus behind the micro services where each service will publish it's transactions.
- 
-![Data Processing Diagram](image-1.png) 
+
+![Data Processing Diagram](image-2.png)
 
 what we are now left with is a streaming data source like EventHub or Kafka. 
 In order for us to consume this data for a dashboard we need to aggregate and transform this data into a common layer fit for consumption, our first challenge is that we need to process all this stream data, here we introduce complexities such as throughput pressure and schema management, we also need to have a historical reference loop so that we can handle change markers, keys and general filtering, once we have this we then need to store this and ensure that we can manage inserts, updates and deletes, at this point we have introduced multiple engineering processes and complexities and we haven’t even started with the consumption layer.
