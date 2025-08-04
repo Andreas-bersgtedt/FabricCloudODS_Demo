@@ -248,10 +248,12 @@ During the testing by the AdventureWorks data services business team, they condu
 
 ### Microsoft Purview
 
-![Microsoft Purview Data Map](/images/sec_image.png)  
-
 The SalesLT.Customer table had been classified by [Microsoft Purview](https://learn.microsoft.com/en-us/purview/data-map) to contains encryption data for user passwords that cannot be stored in an analytical data store according to the corporate data protection policies and therefore needs to be removed.
 You are again asked to commission a solution that automatically and persistently removes the data from the sensitive columns prior to being mirrored into the Fabric Mirrored database.
+
+![Microsoft Purview Data Map](/images/sec_image.png)  
+
+
 
 ### The Mitigation
 
