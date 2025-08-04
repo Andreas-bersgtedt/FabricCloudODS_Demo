@@ -19,7 +19,12 @@ In order for us to consume this data for a dashboard we need to aggregate and tr
 It is easy to see that we are increasing points of failure and latency, we are also starting to create a process that is not fault tolerant, for instance if we need to reprocess our data stores due to an outage or data corruption we will need to re-ship the data from the application databases as the streaming environment has relatively short retention, this also applies to back pressure as I have seen in the past how increased publishing of events can cause consumption delays in downstream processing.  
 
 
-## The Resurgence of the Operational Data Store
+
+
+
+
+
+# The Resurgence of the Operational Data Store
 
  ![ODS Purpose](/images/image.png)
 
