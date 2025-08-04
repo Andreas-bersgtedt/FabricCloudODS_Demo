@@ -46,7 +46,7 @@ Lets consider the following scenario:
 
 ## Scenario brief:
 Adventure works Global has many ecommerce portals across the world that are hosted on premise and in the cloud, each portal has two PostgreSQL databases and one SQL Server database server.
-The application consists of transactions that are managed using a micro services architecture and one end to end transaction generate data across all three application databases. 
+The application consists of transactions that are managed using a micro services architecture, every customer transaction generate data across all three application databases. 
 
 The global operations business unit of Adventure works wants to create a consistent operational reporting data store that can be used to simplify the existing complex data APIs that are serving data back to the application, furthermore the data services division is planning on building out a customer self-services capability that will introduce an agentic AI layer that enables customers to self-serve across the systems using natural language queries.
 
