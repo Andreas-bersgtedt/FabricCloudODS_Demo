@@ -55,7 +55,7 @@ The global operations business unit of Adventure works wants to create a consist
 ### Technical design requirements
 
 1.	The new data store must be low latency < 2 minutes.
-2.	The new data store must consolidate into a single query engine.
+2.	The new data store must consolidate into a single data access layer.
 3.	Data acquisition must support transactional replication with no table based DML transactions.
 4.	CDC and Change capture is not allowed. 
 5.	Data acquisition must support transparent data encryption on the source application databases.
@@ -63,7 +63,7 @@ The global operations business unit of Adventure works wants to create a consist
 
 ## The Solution
 
-With the above requirements in mind the data solutions architecture team is considering Microsoft Azure’s PaaS offering combined with Microsoft Fabric as this meets all 6 requirements and supports the vision of global operations and data services.
+With the above requirements in mind the data solutions architecture team is considering Microsoft Azure’s PaaS offering combined with Microsoft Fabric as this meets all 6 requirements and supports the vision of both global operations and data services.
 
 ![Fabric Cloud ODS Architecture](/images/image-2.png)
 
@@ -144,7 +144,7 @@ and is accessible.
 ![Select statement in Fabric](/images/image-10.png)
 
 
-Now that data the replica is created, you can now start building a data load, do this by creating a stored procedure using the “[Generate_SO.SQL](/scripts/GenerateSO.sql)” script.
+Now that data the replica is created, you can now start building the data load simulation, do this by creating a stored procedure using the “[Generate_SO.SQL](/scripts/GenerateSO.sql)” script on the SQL Server 2022 source database server.
 In order to simulate a regular flow of transacions create a [SQL Server Job](https://learn.microsoft.com/en-us/ssms/agent/create-a-job?view=sql-server-ver16) that executes the new stored procedure every 10 seconds.
     
 
@@ -242,15 +242,18 @@ To conclude we can clearly see that we have managed to implement an architecture
 
 
 
-## Governance and compliance review
+# Governance and compliance review
 
 During the testing by the AdventureWorks data services business team, they conducted a compliance review that triggered an audit finding pertaining to sensitive information. 
 
+### Microsoft Purview
+
 ![Microsoft Purview Data Map](/images/sec_image.png)  
 
-
-In the SalesLT.Customer table contains encryption data for user passwords that cannot be stored in an analytical data store according to the corporate data protection policies and therefore needs to be removed.
+The SalesLT.Customer table had been classified by [Microsoft Purview](https://learn.microsoft.com/en-us/purview/data-map) to contains encryption data for user passwords that cannot be stored in an analytical data store according to the corporate data protection policies and therefore needs to be removed.
 You are again asked to commission a solution that automatically and persistently removes the data from the sensitive columns prior to being mirrored into the Fabric Mirrored database.
+
+### The Mitigation
 
 As the lead architect on the project you conclude that in order to comply with the requirements you will need to use a SQL Server trigger on the SalesLT.Customer table that blanks out the data in the PasswordHash and PasswordSalt columns when data is inserted or updates in the application database.
 
